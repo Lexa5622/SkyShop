@@ -5,6 +5,7 @@ import org.skypro.skyshop.Product;
 import java.util.Arrays;
 
 public class ProductBasket {
+    private static int specialProduct = 0;
     private Product[] productBasket;
     private int weight;
 
@@ -59,11 +60,16 @@ public class ProductBasket {
             return;
         }
         for (Product product: productBasket){
-            if (product != null){
+            if (product != null && product.isSpecial()){
+                specialProduct ++;
+                System.out.println(product);
+            } else {
                 System.out.println(product);
             }
+
         }
         System.out.println("Итого: " + getAllPrice());
+        System.out.println("Специальных товаров: " + specialProduct);
     }
 
     public boolean isNoProductInBasket(String productName){
