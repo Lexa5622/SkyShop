@@ -1,8 +1,9 @@
 package org.skypro.skyshop;
 
-import javax.xml.namespace.QName;
+import org.skypro.skyshop.Search.Searchable;
 
-public abstract class Product {
+public abstract class  Product implements Searchable {
+    private final String TYPE = "PRODUCT";
     protected String name;
 
     public Product(String name) {
@@ -24,4 +25,13 @@ public abstract class Product {
         return "Наименование продукта: " + this.name;
     }
 
+    @Override
+    public String searchTerm() {
+        return name;
+    }
+
+    @Override
+    public String searchContent() {
+        return TYPE;
+    }
 }
