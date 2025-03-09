@@ -1,5 +1,7 @@
 package org.skypro.skyshop;
 
+import org.skypro.skyshop.Search.Searchable;
+
 public class SimpleProduct extends Product{
 
     protected double price;
@@ -18,4 +20,8 @@ public class SimpleProduct extends Product{
     public String toString(){
         return "Наименование продукта: " + this.name + ", Стоимость: " + price;
     }
+
+
+
+
 }
