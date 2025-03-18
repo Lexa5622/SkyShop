@@ -1,9 +1,11 @@
 package org.skypro.skyshop.Search;
 
+import org.skypro.skyshop.myException.BestResultNotFound;
+
 import java.util.Arrays;
 
 public class SearchEngine {
-    private Searchable[] searchables;
+    private final Searchable[] searchables;
     private int count;
 
     public SearchEngine(int size){
@@ -48,5 +50,24 @@ public class SearchEngine {
         }
         return s.toString();
 
+    }
+
+    public Searchable bestSearchByTerm (String substr) throws BestResultNotFound {
+        int match = 0;
+        Searchable searchable = null;
+        for (Searchable search: searchables) {
+            if(search == null){
+                continue;
+            }
+            int countMatch = search.getSearchTerm(search.searchTerm(), substr);
+            if (match < countMatch) {
+                match = countMatch;
+                searchable = search;
+            }
+        }
+        if (searchable == null){
+            throw new BestResultNotFound("Для запроса " + substr + " совпадений не найдено.");
+        }
+        return searchable;
     }
 }

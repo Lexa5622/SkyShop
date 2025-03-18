@@ -2,11 +2,26 @@ package org.skypro.skyshop;
 
 import org.skypro.skyshop.Search.Searchable;
 
+import java.io.IOException;
+
 public abstract class  Product implements Searchable {
     private final String TYPE = "PRODUCT";
     protected String name;
 
+    public void checkName(String name) throws IllegalArgumentException {
+       if (name == null){
+           throw new IllegalArgumentException("Наименование не может быть пустым");
+       }
+        if (name.isBlank()){
+            throw new IllegalArgumentException("Пустое наименование");
+        }
+    }
     public Product(String name) {
+        try {
+            checkName(name);
+        } catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
         this.name = name;
     }
 
