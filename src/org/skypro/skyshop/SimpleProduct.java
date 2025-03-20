@@ -2,12 +2,24 @@ package org.skypro.skyshop;
 
 import org.skypro.skyshop.Search.Searchable;
 
+import java.io.IOException;
+
 public class SimpleProduct extends Product{
 
     protected double price;
-
+    public void checkPrice(double price) throws IllegalArgumentException{
+        if (price <= 0){
+            throw new IllegalArgumentException("Отрицательная цена");
+        }
+    }
     public SimpleProduct(String name, double price){
         super(name);
+        try {
+            checkPrice(price);
+
+        } catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
         this.price = price;
     }
 

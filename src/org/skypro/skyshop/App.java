@@ -3,8 +3,10 @@ package org.skypro.skyshop;
 import org.skypro.skyshop.Search.SearchEngine;
 import org.skypro.skyshop.Search.Searchable;
 import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.myException.BestResultNotFound;
 
 import java.util.Arrays;
+
 
 public class App {
 
@@ -12,31 +14,44 @@ public class App {
         ProductBasket productBasket = new ProductBasket(5);
         System.out.println("Добавление продуктов ");
         productBasket.addProduct(new SimpleProduct("Рыба", 50));
-        productBasket.addProduct(new DiscountProduct("Мясо", 100, 20));
+        productBasket.addProduct(new DiscountProduct("Мясо", 5, 20));
+        productBasket.addProduct((new SimpleProduct("Рыбная рыбная рыба", 120)));
         productBasket.addProduct(new FixPriceProduct("Сыр"));
         productBasket.addProduct(new SimpleProduct("Конфеты", 50));
         productBasket.addProduct(new SimpleProduct("Лук", 200));
         System.out.println("Interfaces");
 
         Searchable searchable = new SimpleProduct("Рыба", 50);
-        Searchable searchable1 = new DiscountProduct("Мясо", 100, 20);
+        //Searchable searchable1 = new DiscountProduct("Мясо", 100, 101);
         Searchable searchable2 = new FixPriceProduct("Сыр");
         Searchable searchable3 = new Article("Title", "Text");
+        Searchable searchable4 = new SimpleProduct("Рыбнаярыбнаярыбарыбнаярыбная", 120);
 
         SearchEngine searchEngine = new SearchEngine(5);
 
-        searchEngine.add(searchable);
-        searchEngine.add(searchable2);
+        //searchEngine.add(searchable1);
         searchEngine.add(searchable2);
         searchEngine.add(searchable3);
         searchEngine.add(searchable3);
+        searchEngine.add(searchable4);
 
-        String s = searchEngine.search("Сыр");
-        String s1 = searchEngine.search("Text");
-        System.out.println("Продукты");
-        System.out.println(s);
-        System.out.println("Статьи");
-        System.out.println(s1);
+        try {
+            System.out.println("Найдено");
+            Searchable s1 = searchEngine.bestSearchByTerm("рыб");
+            System.out.println(s1.toString());
+            System.out.println("Не найдено");
+            Searchable s2 = searchEngine.bestSearchByTerm("123");
+
+        } catch (BestResultNotFound e) {
+            e.printStackTrace();
+        }
+
+//        String s = searchEngine.search("Сыр");
+//        String s1 = searchEngine.search("Text");
+//        System.out.println("Продукты");
+//        System.out.println(s);
+//        System.out.println("Статьи");
+//        System.out.println(s1);
 //        System.out.println("Добавление продуктов - нет места");
 //        productBasket.addProduct(new SimpleProduct("Лук", 200));
 //        System.out.println("____________________________________");
