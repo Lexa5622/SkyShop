@@ -2,30 +2,28 @@ package org.skypro.skyshop.Search;
 
 import org.skypro.skyshop.myException.BestResultNotFound;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SearchEngine {
-    private final Searchable[] searchables;
-    private int count;
+    private final List<Searchable> searchables;
 
-    public SearchEngine(int size){
-        this.searchables = new Searchable[size];
-        count = 0;
+    public SearchEngine(){
+        this.searchables = new ArrayList<>();
     }
 
     public String search (String text){
-        Searchable[] result = new Searchable[5];
+        List<Searchable> result = new ArrayList<>();
         int i = 0;
         for (Searchable s: searchables){
             if (s == null){
                 break;
             }
-            if (i == result.length){
-                return "Мест нет";
-            }
+
             String term = s.searchTerm();
             if (term.contains(text)) {
-                result[i] = s;
+                result.add(s);
                 i++;
             }
         }
@@ -33,15 +31,10 @@ public class SearchEngine {
     }
 
     public void add (Searchable searchable){
-        if (count == searchables.length) {
-            System.out.println("Нет места");
-            return;
-        }
-        searchables[count] = searchable;
-        count++;
+        searchables.add(searchable);
     }
 
-    public String printResult(Searchable[] searchable){
+    public String printResult(List<Searchable> searchable){
         StringBuilder s = new StringBuilder();
         for (Searchable search: searchable){
             if (search != null){

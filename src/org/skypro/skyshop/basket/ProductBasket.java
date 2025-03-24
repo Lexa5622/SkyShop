@@ -2,27 +2,21 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.Product;
 
-import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ProductBasket {
     private static int specialProduct = 0;
-    private Product[] productBasket;
-    private int weight;
+    private List<Product> productBasket;
 
-    public ProductBasket(int weight) {
-        this.productBasket = new Product[weight];
+
+    public ProductBasket() {
+        this.productBasket = new LinkedList<>();
+
     }
 
-    private boolean isFreePlace() {
-        for (Product product : productBasket) {
-            if (product == null){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isEmpty(){
+    private boolean isEmpty(List<Product> productBasket){
         for(Product product: productBasket){
             if(product != null){
                 return false;
@@ -32,16 +26,7 @@ public class ProductBasket {
     }
 
     public void addProduct(Product product) {
-        if (!isFreePlace()){
-            System.out.println("В корзине нет места. Возмите тележку.");
-            return;
-        }
-        for (int i = 0; i < productBasket.length; i++){
-            if (productBasket[i] == null){
-                productBasket[i] = product;
-                break;
-            }
-        }
+        productBasket.add(product);
     }
 
     public int getAllPrice() {
@@ -55,7 +40,7 @@ public class ProductBasket {
     }
 
     public void printMyBasket(){
-        if(isEmpty()){
+        if(isEmpty(productBasket)){
             System.out.println("Корзина пуста.");
             return;
         }
@@ -84,10 +69,29 @@ public class ProductBasket {
     }
 
     public void clearBasket() {
-        if (isEmpty()) {
+        if (isEmpty(productBasket)) {
             System.out.println("Корзина пуста.");
         }
-        Arrays.fill(productBasket, null);
+        productBasket.clear();
         System.out.println("Корзина очищена.");
     }
+
+    public List<Product> removeAllProductsNamedBy(String name){
+        List<Product> removeProducts = new LinkedList<>();
+        Iterator<Product> iterator = productBasket.iterator();
+        while(iterator.hasNext()) {
+            Product product = iterator.next();
+            if (product.getName() == name) {
+                removeProducts.add(product);
+                iterator.remove();
+            }
+        }
+        if (isEmpty(removeProducts)){
+            System.out.println("Список пуст");
+        }
+        return removeProducts;
+    }
+
+
+
 }
