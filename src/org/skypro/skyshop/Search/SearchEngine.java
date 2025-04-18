@@ -2,9 +2,7 @@ package org.skypro.skyshop.Search;
 
 import org.skypro.skyshop.myException.BestResultNotFound;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class SearchEngine {
     private final List<Searchable> searchables;
@@ -14,7 +12,7 @@ public class SearchEngine {
     }
 
     public String search (String text){
-        List<Searchable> result = new ArrayList<>();
+        Map<String, Searchable> result = new TreeMap<>();
         int i = 0;
         for (Searchable s: searchables){
             if (s == null){
@@ -23,7 +21,7 @@ public class SearchEngine {
 
             String term = s.searchTerm();
             if (term.contains(text)) {
-                result.add(s);
+                result.put(term, s);
                 i++;
             }
         }
@@ -34,15 +32,8 @@ public class SearchEngine {
         searchables.add(searchable);
     }
 
-    public String printResult(List<Searchable> searchable){
-        StringBuilder s = new StringBuilder();
-        for (Searchable search: searchable){
-            if (search != null){
-                s.append(search).append('\n');
-            }
-        }
-        return s.toString();
-
+    public String printResult(Map<String, Searchable> result){
+        return result.toString();
     }
 
     public Searchable bestSearchByTerm (String substr) throws BestResultNotFound {
