@@ -25,6 +25,20 @@ public abstract class  Product implements Searchable {
         this.name = name;
     }
 
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(name);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Product otherProduct = (Product) obj;
+        return name.equals(otherProduct.name);
+    }
+
     public String getName() {
         return name;
     }
