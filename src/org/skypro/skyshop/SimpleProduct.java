@@ -3,8 +3,9 @@ package org.skypro.skyshop;
 import org.skypro.skyshop.Search.Searchable;
 
 import java.io.IOException;
+import java.util.Comparator;
 
-public class SimpleProduct extends Product{
+public class SimpleProduct extends Product {
 
     protected double price;
     public void checkPrice(double price) throws IllegalArgumentException{
@@ -32,8 +33,5 @@ public class SimpleProduct extends Product{
     public String toString(){
         return "Наименование продукта: " + this.name + ", Стоимость: " + price;
     }
-
-
-
 
 }

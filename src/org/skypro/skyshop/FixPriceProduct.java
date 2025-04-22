@@ -2,6 +2,8 @@ package org.skypro.skyshop;
 
 import org.skypro.skyshop.Product;
 
+import java.util.Comparator;
+
 public class FixPriceProduct extends Product {
     private static final int FIX_PRICE = 100;
 
@@ -23,6 +25,5 @@ public class FixPriceProduct extends Product {
     public boolean isSpecial() {
         return true;
     }
-
 
 }

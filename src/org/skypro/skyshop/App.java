@@ -32,6 +32,7 @@ public class App {
         //Searchable searchable1 = new DiscountProduct("Мясо", 100, 101);
         Searchable searchable2 = new FixPriceProduct("Сыр");
         Searchable searchable3 = new Article("Title", "Text");
+        Searchable searchable5 = new Article("12345", "Text2");
         Searchable searchable4 = new SimpleProduct("Рыбнаярыбнаярыбарыбнаярыбная", 120);
 
         SearchEngine searchEngine = new SearchEngine();
@@ -41,6 +42,7 @@ public class App {
         searchEngine.add(searchable3);
         searchEngine.add(searchable3);
         searchEngine.add(searchable4);
+        searchEngine.add(searchable5);
 
         try {
             System.out.println("Найдено");
@@ -78,6 +80,7 @@ public class App {
         System.out.println("____________________________________");
         System.out.println("Обнулить корзину");
         productBasket.clearBasket();
+        productBasket.printMyBasket();
         System.out.println("____________________________________");
         System.out.println("Печать пустой корзины");
         productBasket.printMyBasket();

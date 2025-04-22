@@ -2,6 +2,8 @@ package org.skypro.skyshop;
 
 import org.skypro.skyshop.Product;
 
+import java.util.Comparator;
+
 public class DiscountProduct extends Product {
     protected double basePrice;
     protected int discountInPercent;
@@ -39,6 +41,4 @@ public class DiscountProduct extends Product {
     public boolean isSpecial() {
         return true;
     }
-
-
 }
