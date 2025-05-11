@@ -68,7 +68,7 @@ public class ProductBasket {
 
     public boolean isNoProductInBasket(String productName){
         for(Product product: basket){
-            if (product.getName() == productName){
+            if (Objects.equals(product.getName(), productName)){
                 System.out.println("Такой продукт есть в корзине");
                 return false;
             }
@@ -81,6 +81,7 @@ public class ProductBasket {
         if (isEmpty(basket)) {
             System.out.println("Корзина пуста.");
         }
+        basket.clear();
         productBasket.clear();
         System.out.println("Корзина очищена.");
     }
@@ -90,7 +91,7 @@ public class ProductBasket {
         Iterator<Product> iterator = basket.iterator();
         while(iterator.hasNext()) {
             Product product = iterator.next();
-            if (product.getName() == name) {
+            if (Objects.equals(product.getName(), name)) {
                 removeProducts.add(product);
                 iterator.remove();
             }
